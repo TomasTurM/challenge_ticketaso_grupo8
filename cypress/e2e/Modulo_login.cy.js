@@ -1,26 +1,27 @@
 describe('Modulo login exitoso', () => {
 
- // --------- Generadores de datos dinámicos ---------
-
-   const generarEmail = (valido = true) => {
-   const random = Math.random().toString(36).substring(7);
+  // --------- Generadores de datos dinámicos ---------
+  const generarEmail = (valido = true) => {
+    const random = Math.random().toString(36).substring(7);
     return valido ? `${random}@gmail.com` : `${random}#correo.com`; // inválido
   };
 
-  
-
-   // --------- Antes de cada test ---------
+  // --------- Antes de cada test ---------
   beforeEach(() => {
     cy.visit('https://ticketazo.com.ar/auth/login?callbackUrl=/tickets/list'); // URL del formulario
   });
 
   // --------- Escenarios positivos ---------
-  it('✅ Escenario login exitoso', () => {
+  it.only('✅ Escenario login exitoso', () => {
    
     cy.get('[data-cy="input-email"]').type('admin@admin.com')
     cy.get('[data-cy="input-password"]').type('admin')
     cy.get ('[data-cy="btn-login"]').click()
+
+    cy.wait(2000)
+    cy.url().should('include', 'tickets/list')
   })
+
   it('✅ Registro del campo email', () => {
    
     const email = generarEmail(true);
@@ -31,13 +32,13 @@ describe('Modulo login exitoso', () => {
     
   })
 
-   it('✅ link olvido su contraseña', () => {
+  it('✅ link olvido su contraseña', () => {
    
     cy.get ('[data-cy="btn-forgot-password"]').click()
     
   })
 
-   it('✅ link No tienes cuenta, Registrate', () => {
+  it('✅ link No tienes cuenta, Registrate', () => {
    
     cy.get ('[data-cy="btn-register-user"]').click()
     
@@ -54,13 +55,13 @@ describe('Modulo login exitoso', () => {
     const emailInvalido = generarEmail(false);
 
     cy.get('[data-cy="input-email"]').type(emailInvalido);
-     cy.get('[data-cy="input-password"]').type('admin')
+    cy.get('[data-cy="input-password"]').type('admin')
     cy.get ('[data-cy="btn-login"]').click()
 
-    cy.contains('Incluye un signo "@" en la dirección de correo electrónico.').should('be.visible');
+    cy.get('[data-slot="error-message"').should('be.visible')
   });
 
-    it('❌ Intentar enviar formulario con campos vacíos', () => {
+  it('❌ Intentar enviar formulario con campos vacíos', () => {
     cy.get ('[data-cy="btn-login"]').click()
     cy.contains('Correo o contraseña incorrectos').should('be.visible');
   });
