@@ -12,7 +12,7 @@ describe('Modulo login exitoso', () => {
   });
 
   // --------- Escenarios positivos ---------
-  it.only('✅ Escenario login exitoso', () => {
+  it('✅ Escenario login exitoso', () => {
    
     cy.get('[data-cy="input-email"]').type('admin@admin.com')
     cy.get('[data-cy="input-password"]').type('admin')
