@@ -63,8 +63,17 @@ cy.contains('Con Butacas', { timeout: 20000 }).should('be.visible').click();
   cy.wait(4000)
     cy.contains( 'Comprar').click({ force: true });
     cy.contains( 'Generar Entrada Gratuita').click({ force: true });
-   cy.get('[data-cy="titulo-mis-entradas"]', { timeout: 30000 }).should('be.visible').and('contain', 'Mis Entradas');
+   cy.wait(4000)
+
+   cy.visit('https://vps-3696213-x.dattaweb.com/tickets/list');
+
+   cy.get('[data-cy="titulo-mis-entradas"]', { timeout: 4000 }).should('be.visible').and('contain', 'Mis Entradas');
+   cy.get('[data-cy="btn-ver-entradas-4"]').click({ force: true });
    
+ cy.contains(  'Ver todas las entradas').click({ force: true });
+ cy.get('[data-cy="btn-ver-ticket-2564"]').click({ force: true });
+ cy.wait(5000);
+ cy.get('[data-cy="btn-cerrar-modal-tickets-grupo"]').click({ force: true });
 
 
 
