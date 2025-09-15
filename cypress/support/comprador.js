@@ -6,7 +6,7 @@ const compradorEmail = 'admin@admin.com';
 const compradorPassword = 'admin';
 
 Cypress.Commands.add('loginCompradorPos', () => {
-     // cy.viewport(1400, 900); // Fuerza modo escritorio
+    cy.viewport(1400, 900); // Fuerza modo escritorio
 
   cy.visit('https://vps-3696213-x.dattaweb.com/');
   cy.get('a > .z-0').click({ force: true }); // Click on "Iniciar sesión"
@@ -17,7 +17,7 @@ Cypress.Commands.add('loginCompradorPos', () => {
 });
 
 Cypress.Commands.add('loginCompradorEmailNeg', () => {
-  //    cy.viewport(1400, 900); // Fuerza modo escritorio
+    cy.viewport(1400, 900); // Fuerza modo escritorio
 
   cy.visit('https://vps-3696213-x.dattaweb.com/');
   cy.get('a > .z-0').click({ force: true });
@@ -28,7 +28,7 @@ Cypress.Commands.add('loginCompradorEmailNeg', () => {
 })
 
 Cypress.Commands.add('loginCompradorPassNeg', () => {
-  //    cy.viewport(1400, 900); // Fuerza modo escritorio
+    cy.viewport(1400, 900); // Fuerza modo escritorio
 
   cy.visit('https://vps-3696213-x.dattaweb.com/');
   cy.get('a > .z-0').click({ force: true });
@@ -39,14 +39,14 @@ Cypress.Commands.add('loginCompradorPassNeg', () => {
 });
 
 Cypress.Commands.add('comprarEntradasConButacas', () => {
-  //    cy.viewport(1400, 900); // Fuerza modo escritorio
+    cy.viewport(1400, 900); // Fuerza modo escritorio
 
    cy.visit('https://vps-3696213-x.dattaweb.com/');
   cy.get('[data-cy="btn-ver-evento-4"]').click({ force: true });
   cy.get('button').contains('Adquirir entrada').click({ force: true });
-  ;
+   cy.wait(4000);
 
-cy.contains('Con Butacas', { timeout: 20000 }).should('be.visible').click();
+cy.contains( 'Con Butacas', { timeout: 20000 }).should('be.visible').click();
 
 
   // elección de 4 butacas desocupadas
@@ -62,12 +62,18 @@ cy.contains('Con Butacas', { timeout: 20000 }).should('be.visible').click();
 
   cy.wait(4000)
     cy.contains( 'Comprar').click({ force: true });
-    cy.contains( 'Generar Entrada Gratuita').click({ force: true });
-   cy.get('[data-cy="titulo-mis-entradas"]', { timeout: 30000 }).should('be.visible').and('contain', 'Mis Entradas');
+    cy.contains(  'Generar Entrada Gratuita').click({ force: true });
+     cy.wait(4000)
+
+   cy.visit('https://vps-3696213-x.dattaweb.com/tickets/list');
+
+   cy.get('[data-cy="titulo-mis-entradas"]', { timeout: 4000 }).should('be.visible').and('contain', 'Mis Entradas');
+   cy.get('[data-cy="btn-ver-entradas-4"]').click({ force: true });
    
-
-
-
+ cy.contains(  'Ver todas las entradas').click({ force: true });
+ cy.get('[data-cy="btn-ver-ticket-2564"]').click({ force: true });
+ cy.wait(5000);
+ cy.get('[data-cy="btn-cerrar-modal-tickets-grupo"]').click({ force: true });
 
   /*cy.contains('button', 'Comprar').click({ force: true });
   cy.contains('button', 'Generar Entrada Gratuita').click({ force: true });

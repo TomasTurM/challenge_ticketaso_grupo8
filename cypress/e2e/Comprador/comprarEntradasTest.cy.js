@@ -1,5 +1,9 @@
 describe('Usuario compra entradas de evento', () => {
+
+ 
+
     it('Compra exitosa de entradas con usuario ingresado', () => {
+           cy.viewport(1400, 900); // Fuerza modo escritorio
         cy.loginCompradorPos();
         cy.comprarEntradasConButacas();
     })
@@ -11,4 +15,5 @@ describe('Usuario compra entradas de evento', () => {
         cy.comprarEntradasConButacas();
         cy.url().should('include', '/auth/login');
     })
+   
 })

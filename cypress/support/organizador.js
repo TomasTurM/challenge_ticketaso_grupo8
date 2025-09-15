@@ -4,7 +4,7 @@ const organizadorEmail = 'admin@admin.com';
 const organizadorPassword = 'admin';
 
 Cypress.Commands.add('registroOrganizador', (email = 'ceferinomonier@gmail.com') => {
-  //    cy.viewport(1400, 900); // Fuerza modo escritorio
+   cy.viewport(1400, 900); // Fuerza modo escritorio
 
     cy.visit('https://vps-3696213-x.dattaweb.com/');
     cy.get('a > .z-0').click({ force: true }); // Click en "Iniciar sesión"
@@ -55,7 +55,7 @@ Cypress.Commands.add('crearOrganizadorViaAPI', (email = 'ceferinomonier@gmail.co
 });
 
 Cypress.Commands.add('loginOrganizadorPos', () => {
-    //    cy.viewport(1400, 900); // Fuerza modo escritorio
+       cy.viewport(1400, 900); // Fuerza modo escritorio
 
     cy.visit('https://vps-3696213-x.dattaweb.com/');
         cy.get('.loader').should('not.exist');
@@ -69,7 +69,7 @@ Cypress.Commands.add('loginOrganizadorPos', () => {
 });
 
 Cypress.Commands.add('loginOrganizadorEmailNeg', () => {
-    //    cy.viewport(1400, 900); // Fuerza modo escritorio
+       cy.viewport(1400, 900); // Fuerza modo escritorio
 
     cy.visit('https://vps-3696213-x.dattaweb.com/');
     cy.get('a > .z-0').click({ force: true });
@@ -80,7 +80,7 @@ Cypress.Commands.add('loginOrganizadorEmailNeg', () => {
 })
 
 Cypress.Commands.add('loginOrganizadorPassNeg', () => {
-     //   cy.viewport(1400, 900); // Fuerza modo escritorio
+        cy.viewport(1400, 900); // Fuerza modo escritorio
 
     cy.visit('https://vps-3696213-x.dattaweb.com/');
     cy.get('a > .z-0').click({ force: true });
@@ -109,7 +109,6 @@ Cypress.Commands.add('crearEventoPositivo', () => {
 
     cy.get('[data-cy="select-lugar-evento"]').click();
     cy.get('[data-cy="option-lugar-7"]').click();
-
     // en este momento no carga el combobox NINGUNA PROVINCIA
     // intento con esta opcion " No Items" y me da error tambien
      //   cy.get('[data-cy="No Items"]').click();
