@@ -6,7 +6,7 @@ const compradorEmail = 'admin@admin.com';
 const compradorPassword = 'admin';
 
 Cypress.Commands.add('loginCompradorPos', () => {
-     // cy.viewport(1400, 900); // Fuerza modo escritorio
+    cy.viewport(1400, 900); // Fuerza modo escritorio
 
   cy.visit('https://vps-3696213-x.dattaweb.com/');
   cy.get('a > .z-0').click({ force: true }); // Click on "Iniciar sesión"
@@ -17,7 +17,7 @@ Cypress.Commands.add('loginCompradorPos', () => {
 });
 
 Cypress.Commands.add('loginCompradorEmailNeg', () => {
-  //    cy.viewport(1400, 900); // Fuerza modo escritorio
+  cy.viewport(1400, 900); // Fuerza modo escritorio
 
   cy.visit('https://vps-3696213-x.dattaweb.com/');
   cy.get('a > .z-0').click({ force: true });
@@ -28,7 +28,7 @@ Cypress.Commands.add('loginCompradorEmailNeg', () => {
 })
 
 Cypress.Commands.add('loginCompradorPassNeg', () => {
-  //    cy.viewport(1400, 900); // Fuerza modo escritorio
+  cy.viewport(1400, 900); // Fuerza modo escritorio
 
   cy.visit('https://vps-3696213-x.dattaweb.com/');
   cy.get('a > .z-0').click({ force: true });
@@ -39,7 +39,7 @@ Cypress.Commands.add('loginCompradorPassNeg', () => {
 });
 
 Cypress.Commands.add('comprarEntradasConButacas', () => {
-  //    cy.viewport(1400, 900); // Fuerza modo escritorio
+     cy.viewport(1400, 900); // Fuerza modo escritorio
 
    cy.visit('https://vps-3696213-x.dattaweb.com/');
   cy.get('[data-cy="btn-ver-evento-4"]').click({ force: true });
