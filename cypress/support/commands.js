@@ -27,11 +27,11 @@
 import { userData } from "../e2e/Data/UserData"
 
 
-Cypress.Commands.add('fillInputs', (dni) => {
+Cypress.Commands.add('fillInputs', (customData) => {
   cy.get('[data-cy="input-nombres"]').type(userData.nombres)
   cy.get('[data-cy="input-apellido"]').type(userData.apellido)
   cy.get('[data-cy="input-telefono"]').type(userData.telefono)
-  cy.get('[data-cy="input-dni"]').type(dni)
+  cy.get('[data-cy="input-dni"]').type(customData.dni)
   cy.get('[data-cy="select-provincia"]').click()
   cy.get('[data-cy="select-provincia"]').type(`${userData.provincia}{enter}`)
   cy.get('[data-cy="select-localidad"]').click()
@@ -39,10 +39,10 @@ Cypress.Commands.add('fillInputs', (dni) => {
   cy.contains('dd').type(userData.fechaNacimiento.dd)
   cy.contains('mm').type(userData.fechaNacimiento.mm)
   cy.contains('aaaa').type(userData.fechaNacimiento.aaaa)
-  cy.get('[data-cy="input-email"]').type(userData.email)
-  cy.get('[data-cy="input-confirmar-email"]').type(userData.email)
-  cy.get('[data-cy="input-password"]').type(userData.password)
-  cy.get('[data-cy="input-repetir-password"]').type(userData.password)
+  cy.get('[data-cy="input-email"]').type(customData.email ?? userData.email)
+  cy.get('[data-cy="input-confirmar-email"]').type(customData.email ?? userData.email)
+  cy.get('[data-cy="input-password"]').type(customData.password)
+  cy.get('[data-cy="input-repetir-password"]').type(customData.password2)
 })
 
 Cypress.Commands.add('clickRegisterButton', () => {
