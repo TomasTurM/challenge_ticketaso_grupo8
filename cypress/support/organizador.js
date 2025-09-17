@@ -1,7 +1,13 @@
-//const organizadorEmail = 'ceferinomonier@gmail.com';
-//const organizadorPassword = 'Fabian0453+';
-const organizadorEmail = 'admin@admin.com';
-const organizadorPassword = 'admin';
+const organizadorEmail1 = 'ceferinomonier@hotmail.com';
+const organizadorPassword1= 'Si12345678.'
+//const organizadorEmail = 'admin@admin.com';
+//const organizadorPassword = 'admin';
+
+//OLAF DISCO	Particular	
+// user1757809578746@testmail.com	3698521478	43475896	Chaco	Charata	Calle Cualquiera 0453	
+
+
+
 
 Cypress.Commands.add('registroOrganizador', (email = 'ceferinomonier@gmail.com') => {
    cy.viewport(1400, 900); // Fuerza modo escritorio
@@ -43,6 +49,10 @@ Cypress.Commands.add('crearOrganizadorViaAPI', (email = 'ceferinomonier@gmail.co
         direccion: "Calle Cualquiera 0453",
         tipo: 0
     };
+    //OLAF DISCO	Particular	user1757809578746@testmail.com	3698521478	43475896	Chaco	Charata	Calle Cualquiera 0453	
+
+
+
 
     cy.request({
         method: 'POST',
@@ -62,8 +72,8 @@ Cypress.Commands.add('loginOrganizadorPos', () => {
     
     //cy.get('a > .z-0').should('be.visible').click();
        cy.get('a > .z-0').click({ force: true }); // Click on "Iniciar sesión"
-    cy.get('[data-cy="input-email"]').type(organizadorEmail);
-    cy.get('[data-cy="input-password"]').type(organizadorPassword);
+    cy.get('[data-cy="input-email"]').type(organizadorEmail1);
+    cy.get('[data-cy="input-password"]').type(organizadorPassword1);
     cy.get('[data-cy="btn-login"]').click();
     cy.get('[data-cy="error-message"]').should('not.exist');
 });
@@ -91,9 +101,14 @@ Cypress.Commands.add('loginOrganizadorPassNeg', () => {
 });
 
 Cypress.Commands.add('crearEventoPositivo', () => {
+   // OLAF DISCO	Particular	user1757809578746@testmail.com	3698521478	43475896	Chaco	Charata	Calle Cualquiera 0453	
+
+
+
+     cy.viewport(1400, 900); // Fuerza modo escritorio
     cy.get('a[href="/newEvent"]').click({ force: true })
     cy.contains('Cargar Función').should('be.visible')
-    cy.get('[data-cy="input-titulo"]').type('Desakatados en OLAF DISCO');
+    cy.get('[data-cy="input-titulo"]').type('Metallica Black Album Tributo');
 
     cy.get('[aria-label="día, "]').type('01')
     cy.get('[aria-label="mes, "]').type('01')
@@ -109,19 +124,17 @@ Cypress.Commands.add('crearEventoPositivo', () => {
 
     cy.get('[data-cy="select-lugar-evento"]').click();
     cy.get('[data-cy="option-lugar-7"]').click();
-    // en este momento no carga el combobox NINGUNA PROVINCIA
-    // intento con esta opcion " No Items" y me da error tambien
-     //   cy.get('[data-cy="No Items"]').click();
+   
 
-    cy.get('[data-cy="input-nombre-lugar"]').type('OLAF DISCO');
+    cy.get('[data-cy="input-nombre-lugar"]').type('Ceferino Events');
     cy.get('[data-cy="input-calle-lugar"]').type('Cordoba');
     cy.get('[data-cy="input-altura-lugar"]').type('0453');
     cy.get('[data-cy="input-codigo-postal-lugar"]').type('5800');
     cy.get('input[placeholder="Seleccione una provincia"]').click();
     cy.contains('span', 'Córdoba').click();
     cy.get('input[placeholder="Seleccione una localidad"]').click();
-    cy.contains('span', 'La Calera').click();
-    cy.get('[data-cy="input-info"]').type('Evento de baile de OLAF DISCO');
+    cy.contains('span', 'Córdoba').click();
+    cy.get('[data-cy="input-info"]').type('Concierto tributo METALLICA');
 
     cy.contains('button', 'Siguiente').click();
 

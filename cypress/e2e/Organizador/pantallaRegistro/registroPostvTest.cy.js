@@ -22,3 +22,7 @@ describe('Registro de un nuevo usuario organizador', () => {
     cy.contains('Usuario no confirmado').should('exist');
   })
 });
+
+//OLAF DISCO	Particular	user1757809578746@testmail.com	3698521478	43475896	Chaco	Charata	Calle Cualquiera 0453	
+
+
