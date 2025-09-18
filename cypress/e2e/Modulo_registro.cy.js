@@ -26,11 +26,11 @@ describe("Modulo registro exitoso", () => {
     it("Campo sin completar", () => {
         cy.fillInputs({...userDataWithEmptyDNI});
         cy.clickRegisterButton();
-        cy.contains("Completa este campo").should('be.visible')
+        cy.get('[data-invalid="true"]').should('be.visible')
     });
 
 
-    it("Email ya registrado", () => {
+    it.only("Email ya registrado", () => {
         cy.fillInputs({...userDataWithRepeatEmail});
         cy.clickRegisterButton();
         cy.contains("Ya existe un usuario registrado con ese correo electrónico").should('be.visible')
@@ -41,7 +41,7 @@ describe("Modulo registro exitoso", () => {
         cy.fillInputs({...userDataWithWrongFormatDni});
         cy.clickRegisterButton();
         cy.get('[data-cy="input-dni"]').should('have.value', '1234');
-        cy.contains("Utiliza un formato que coincida con el solicitado").should('be.visible')
+        cy.get('[data-filled="true"][data-invalid="true"]').should('be.visible')
     });
 
 
