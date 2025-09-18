@@ -4,7 +4,7 @@ describe("Filtrar por Eventos Cercanos", () => {
 let  urlapi="https://vps-3696213-x.dattaweb.com/" 
  
   it("click en eventos cercanos", () => {
-    eventocercano.forEach((evento) => {
+   
       
      // cy.visit("https://vps-3696213-x.dattaweb.com/");
            cy.viewport(1400, 900); // Fuerza modo escritorio
@@ -18,6 +18,5 @@ let  urlapi="https://vps-3696213-x.dattaweb.com/"
           
       
    
-    });
-  });
 });
+  });
