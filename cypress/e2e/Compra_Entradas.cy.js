@@ -82,18 +82,18 @@ describe('Compra de entradas', () => {
       .then((butacas) => {
         const index = Math.floor(Math.random() * butacas.length);//elige una random
         cy.wrap(butacas[index]).click();//hace click en la butaca elegida
-    //6-Seleccionar Comprar
+        //6-Seleccionar Comprar
         cy.contains('button', 'Comprar (1)').click();
-    //7-Marcar el checkbox Aceptar términos y condiciones
+        //7-Marcar el checkbox Aceptar términos y condiciones
         cy.get('.group > .font-inherit').click()
-    // 8- Seleccionar Pagar
+        // 8- Seleccionar Pagar
         cy.get(':nth-child(4) > :nth-child(1) > .z-0').click()
-    // 9-Espera que la URL contenga "mercadopago"
+        // 9-Espera que la URL contenga "mercadopago"
         cy.visit("https://www.mercadopago.com.ar/checkout/v1/payment/redirect/f0db5fd8-9714-4b41-9959-f8e9c728e22d/payment-option-form/?preference-id=1423293488-1625c8a9-0d36-4d50-99d3-a9f34530d01f&router-request-id=2d66108a-a0f8-4e98-a652-bd69bfdc48b8&p=6dfb0e3aa962896d0ef18f62aa12834e", { force: true })
         cy.url().should('include', 'mercadopago');
       })
   })
-  it ('Comprar múltiples tipos de entrada', () => {
+  it('Comprar múltiples tipos de entrada', () => {
     //1-Ingresar al link
     cy.visit('https://vps-3696213-x.dattaweb.com/')
     // 2- Hacer clic en "Ver evento"
@@ -159,4 +159,24 @@ describe('Compra de entradas', () => {
     cy.get(':nth-child(3) > :nth-child(2)').should('contain', 'Comisión de servicio: $13600.00 (8% del valor base)')
     cy.get('div.flex.justify-between.items-center.text-lg.font-semibold').should('contain.text', 'Total').and('contain.text', '$183600.00');
   })
+
+  it('Carrito vacío', () => {
+    //1-Ingresar al link
+    cy.visit('https://vps-3696213-x.dattaweb.com/')
+    // 2- Hacer clic en "Ver evento"
+    cy.get('[data-cy="btn-ver-evento-6"]').click()
+    //3- Hacer click en Adquirir entrada
+    cy.contains('h1', 'Los Piojos en River') // Busca el título del evento
+      .parentsUntil('.container')     // Sube hasta el contenedor principal
+      .find('button')                 // Busca todos los botones en ese bloque
+      .contains('Adquirir entrada')   // Filtra el botón correcto
+      .click();                       // Hace clic
+    //4- Realizar Login
+    cy.get('[data-cy="input-email"]').type("celecelcba@gmail.com")
+    cy.get('[data-cy="input-password"]').type("Cypress#25")
+    cy.get('[data-cy="btn-login"]').click()
+    //5-Seleccionar Continuar y verificar que no permite avanzar muestra el botón en gris
+    cy.get('[data-cy="btn-continuar"]').should('be.disabled');
+  })
+
 })
