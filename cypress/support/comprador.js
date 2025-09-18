@@ -1,9 +1,9 @@
 // caso positivo de cuenta de usuario comprador
-//const compradorEmail = 'ceferinomonier@gmail.com';
-//const compradorPassword = 'Fabian0453+';
+const compradorEmail = 'ceferinomonier@gmail.com';
+const compradorPassword = 'Fabian0453+';
 
-const compradorEmail = 'admin@admin.com';
-const compradorPassword = 'admin';
+//const compradorEmail = 'admin@admin.com';
+//const compradorPassword = 'admin';
 
 Cypress.Commands.add('loginCompradorPos', () => {
     cy.viewport(1400, 900); // Fuerza modo escritorio
@@ -46,7 +46,7 @@ Cypress.Commands.add('comprarEntradasConButacas', () => {
   cy.get('button').contains('Adquirir entrada').click({ force: true });
    cy.wait(4000);
 
-cy.contains( 'Con Butacas', { timeout: 20000 }).should('be.visible').click();
+cy.contains( 'Con Butacas', { timeout: 10000 }).should('be.visible').click();
 
 
   // elección de 4 butacas desocupadas
@@ -55,7 +55,7 @@ cy.contains( 'Con Butacas', { timeout: 20000 }).should('be.visible').click();
     .then(($butacas) => {
       expect($butacas.length).to.be.at.least(4);
 
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 4; i++) {
         cy.wrap($butacas[i]).click({ force: true });
       }
     });
@@ -68,10 +68,14 @@ cy.contains( 'Con Butacas', { timeout: 20000 }).should('be.visible').click();
    cy.visit('https://vps-3696213-x.dattaweb.com/tickets/list');
 
    cy.get('[data-cy="titulo-mis-entradas"]', { timeout: 4000 }).should('be.visible').and('contain', 'Mis Entradas');
-   cy.get('[data-cy="btn-ver-entradas-4"]').click({ force: true });
+      cy.viewport(1400, 900); // Fuerza modo escritorio
+
+   cy.get('[data-cy="btn-ver-entradas-4"]').should('be.visible').click({ force: true });
    
  cy.contains(  'Ver todas las entradas').click({ force: true });
- cy.get('[data-cy="btn-ver-ticket-2564"]').click({ force: true });
+   cy.viewport(1400, 900);
+ cy.wait(5000);
+ cy.get('[data-cy="btn-ver-ticket-2564"]').should('be.visible').click({ force: true });
  cy.wait(5000);
  cy.get('[data-cy="btn-cerrar-modal-tickets-grupo"]').click({ force: true });
 

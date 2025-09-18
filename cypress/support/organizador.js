@@ -3,8 +3,6 @@ const organizadorPassword1= 'Si12345678.'
 //const organizadorEmail = 'admin@admin.com';
 //const organizadorPassword = 'admin';
 
-//OLAF DISCO	Particular	
-// user1757809578746@testmail.com	3698521478	43475896	Chaco	Charata	Calle Cualquiera 0453	
 
 
 
@@ -49,7 +47,7 @@ Cypress.Commands.add('crearOrganizadorViaAPI', (email = 'ceferinomonier@gmail.co
         direccion: "Calle Cualquiera 0453",
         tipo: 0
     };
-    //OLAF DISCO	Particular	user1757809578746@testmail.com	3698521478	43475896	Chaco	Charata	Calle Cualquiera 0453	
+   
 
 
 
@@ -68,9 +66,10 @@ Cypress.Commands.add('loginOrganizadorPos', () => {
        cy.viewport(1400, 900); // Fuerza modo escritorio
 
     cy.visit('https://vps-3696213-x.dattaweb.com/');
-        cy.get('.loader').should('not.exist');
-    
-    //cy.get('a > .z-0').should('be.visible').click();
+
+    cy.get('.loader').should('not.exist');
+
+    ///cy.get('a > .z-0').should('be.visible').click();
        cy.get('a > .z-0').click({ force: true }); // Click on "Iniciar sesión"
     cy.get('[data-cy="input-email"]').type(organizadorEmail1);
     cy.get('[data-cy="input-password"]').type(organizadorPassword1);
@@ -82,9 +81,11 @@ Cypress.Commands.add('loginOrganizadorEmailNeg', () => {
        cy.viewport(1400, 900); // Fuerza modo escritorio
 
     cy.visit('https://vps-3696213-x.dattaweb.com/');
+
+
     cy.get('a > .z-0').click({ force: true });
     cy.get('[data-cy="input-email"]').type('incorrecto'); // Email incorrecto
-    cy.get('[data-cy="input-password"]').type(organizadorPassword);
+    cy.get('[data-cy="input-password"]').type(organizadorPassword1);
     cy.get('[data-cy="btn-login"]').click();
     cy.get('[data-cy="error-message"]').should('be.visible');
 })
@@ -94,14 +95,14 @@ Cypress.Commands.add('loginOrganizadorPassNeg', () => {
 
     cy.visit('https://vps-3696213-x.dattaweb.com/');
     cy.get('a > .z-0').click({ force: true });
-    cy.get('[data-cy="input-email"]').type(organizadorEmail);
+    cy.get('[data-cy="input-email"]').type(organizadorEmail1);
     cy.get('[data-cy="input-password"]').type('incorrecto'); // Contraseña incorrecta
     cy.get('[data-cy="btn-login"]').click();
     cy.get('[data-cy="error-message"]').should('be.visible');
 });
 
 Cypress.Commands.add('crearEventoPositivo', () => {
-   // OLAF DISCO	Particular	user1757809578746@testmail.com	3698521478	43475896	Chaco	Charata	Calle Cualquiera 0453	
+   
 
 
 
@@ -132,8 +133,10 @@ Cypress.Commands.add('crearEventoPositivo', () => {
     cy.get('[data-cy="input-codigo-postal-lugar"]').type('5800');
     cy.get('input[placeholder="Seleccione una provincia"]').click();
     cy.contains('span', 'Córdoba').click();
-    cy.get('input[placeholder="Seleccione una localidad"]').click();
-    cy.contains('span', 'Córdoba').click();
+    cy.get('input[placeholder="Seleccione una localidad"]', { timeout: 10000 })
+    .type('Córdoba').type('{enter}').click();
+
+   // cy.contains('span', '/C[oó]rdoba/i').should('be.visible').type('{enter}').click();
     cy.get('[data-cy="input-info"]').type('Concierto tributo METALLICA');
 
     cy.contains('button', 'Siguiente').click();
