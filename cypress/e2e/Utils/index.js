@@ -6,7 +6,7 @@ function generateRandomDNI() {
 }
 
 function generateRandomEmail() {
-  return `test${Math.floor(Math.random() * 100000)}@gmail.com`
+  return `testTicketazo${Math.floor(Math.random() * 100000)}@gmail.com`
 }
 
 

@@ -8,8 +8,10 @@ const userData = {
   telefono: '1234567890',
   provincia: 'Buenos Aires',
   localidad: 'La Plata',
-  fechaNacimiento: { dd: '23', mm: '06', aaaa: '1998' },
+  fechaNacimiento: { dd: 23, mm: 11, aaaa: 1998 },
+  dni: generateRandomDNI(),
   email: generateRandomEmail(),
+  confirmEmail: generateRandomEmail(),
   password: 'Password123!',
   password2Correct: 'Password123!',
   password2Wrong: 'Password321!',
@@ -45,6 +47,21 @@ const userDataWithRepeatEmail = {
     password2: userData.password2Correct
 }
 
+const userDataWithRepeatedDni = {
+    dni: 12345678,
+    password: userData.password, 
+    password2: userData.password2Correct
+}
+
+const userDataWithWrongAge = {
+     fechaNacimiento: { dd: 12, mm: 12, aaaa: 2022 },
+}
+
+const userDataWithDiferentDni = {
+     email2 : "nadaquever@gmail.com",
+}
+
+
 
 const userDataWithWrongFormatDni = {
     dni: 'ABCD1234',
@@ -53,4 +70,5 @@ const userDataWithWrongFormatDni = {
 }
 
 
-export { userData, userDataWithCorrectPassword, userDataWithWrongPassword,userDataWithEmptyDNI,userDataWithRepeatEmail,userDataWithWrongFormatDni }
+export { userData, userDataWithCorrectPassword, userDataWithWrongPassword,userDataWithEmptyDNI,userDataWithRepeatEmail
+    ,userDataWithRepeatedDni,userDataWithWrongAge,userDataWithDiferentDni,userDataWithWrongFormatDni }
