@@ -58,7 +58,7 @@ describe("Modulo registro exitoso", () => {
         cy.contains("La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y símbolos.").should('be.visible')
     });
 
-    it.only("DNI solo numérico", () => { // Plan de pruebas 30
+    it("DNI solo numérico", () => { // Plan de pruebas 30
         cy.fillInputsAndSubmit({...userDataWithWrongFormatDni});
         cy.get('[data-cy="input-dni"]').should('have.value', '1234');
         cy.get('[data-filled="true"][data-invalid="true"]').should('be.visible')

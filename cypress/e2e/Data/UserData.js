@@ -42,6 +42,7 @@ const userDataWithEmptyDNI = {
 
 const userDataWithRepeatEmail = {
     email : "test@gmail.com",
+    emailConfirm : "test@gmail.com",
     dni: generateRandomDNI(),
     password: userData.password, 
     password2: userData.password2Correct
