@@ -102,11 +102,7 @@ Cypress.Commands.add('loginOrganizadorPassNeg', () => {
 });
 
 Cypress.Commands.add('crearEventoPositivo', () => {
-   
-
-
-
-     cy.viewport(1400, 900); // Fuerza modo escritorio
+  cy.viewport(1400, 900); // Fuerza modo escritorio
     cy.get('a[href="/newEvent"]').click({ force: true })
     cy.contains('Cargar Función').should('be.visible')
     cy.get('[data-cy="input-titulo"]').type('Metallica Black Album Tributo');

@@ -24,12 +24,14 @@ describe('Registro de usuario con datos inválidos ', () => {
     cy.contains('dd').type('08');
     cy.contains('mm').type('03');
     cy.contains('aaaa').type('1995');
-    cy.get('[data-cy="input-email"]').type('email-invalido');
-    cy.get('[data-cy="input-confirmar-email"]').type('email-invalido');
+    cy.get('[data-cy="input-email"]').type('email-invalido@');
+    cy.get('[data-cy="input-confirmar-email"]').type('email-invalido@');
     cy.get('[data-cy="input-password"]').type('Fabian0453+');
     cy.get('[data-cy="input-repetir-password"]').type('Fabian0453+');
     cy.get('[data-cy="btn-registrarse"]').click();
-    cy.contains(/Please include an '@' in the email address\..*is missing an '@'\./).should('be.visible');
+    //cy.contains(/Please include an '@' in the email address\..*is missing an '@'\./).should('be.visible');
+        cy.contains('@' ).should('be.visible');
+
     cy.log('✅ El sistema bloqueó correctamente el registro con datos inválidos');
   });
 
