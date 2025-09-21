@@ -21,7 +21,24 @@ describe('Filtrar por provincia y localidad', () => {
 
     cy.get('[data-cy="evento-titulo"]').should('exist');
   });
+
+  it('Checkear por localidades sin eventos', () => {
+    const provincias = [
+      "Catamarca", 
+      "Chaco", 
+      "Chubut", 
+      "Ciudad Autónoma de Buenos Aires",
+      "Córdoba",
+      "Corrientes"
+    ]
+
+    cy.wait(3000)
+    // Seleccionar provincias
+    for(const p of provincias) {
+      cy.get('[data-slot="mainWrapper"]').eq(1).click();
+      cy.get('[data-slot="listbox"]').contains(p).click().wait(3000);
+
+      cy.get('[data-cy="evento-titulo"]').should('exist');
+    }
+  });
 });
-
-
-
