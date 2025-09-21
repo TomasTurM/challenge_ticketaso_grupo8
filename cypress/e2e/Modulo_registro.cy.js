@@ -1,4 +1,4 @@
-import { userDataWithCorrectPassword,userDataWithWrongPassword, userDataWithEmptyDNI, userDataWithWrongFormatDni, userDataWithRepeatEmail, userDataWithRepeatedDni, userDataWithWrongAge, userDataWithDiferentDni } from "./Data/UserData";
+import { userDataWithCorrectPassword,userDataWithWrongPassword, userDataWithEmptyDNI, userDataWithWrongFormatDni, userDataWithRepeatEmail, userDataWithRepeatedDni, userDataWithWrongAge, userDataWithDiferentDni, userDataWithShortPassword, userDataWithWrongFormatPassword, userDataWithWrongLengthDni, userDataWithWrongPhone, userDataWithWrongLengthPhone, userDataWithWrongFormatPhone, userDataWithDiferentEmail } from "./Data/UserData";
 
 
 describe("Modulo registro exitoso", () => {
@@ -9,99 +9,74 @@ describe("Modulo registro exitoso", () => {
     });
 
 
-    it.skip("Registro exitoso", () => { // Plan de pruebas 1
-        cy.fillInputs({...userDataWithCorrectPassword});
-        cy.clickRegisterButton();
-        cy.url().should('include', '/auth/login')
-    })
-    
-    
-    it.skip("Contraseña no coincide", () => { // Plan de pruebas 2
-        cy.fillInputs({...userDataWithWrongPassword});
-        cy.clickRegisterButton();
+    it("Registro exitoso", () => { // Plan de pruebas 1
+       cy.intercept('POST', '/api/backend/register/register-user').as('registerRequest');
+       cy.fillInputsAndSubmit({ ...userDataWithCorrectPassword });
+       cy.wait('@registerRequest').its('response.statusCode').should('eq', 201);
+       cy.url().should('include', '/auth/login');
+    });
+
+    it("Contraseña no coincide", () => { // Plan de pruebas 2
+        cy.fillInputsAndSubmit({...userDataWithWrongPassword});
         cy.contains("Las contraseñas no coinciden").should('be.visible')
     })
-    
-    
-    it.skip("Campo sin completar", () => { // Plan de pruebas 3
-        cy.fillInputs({...userDataWithEmptyDNI});
-        cy.clickRegisterButton();
+
+    it("Campo sin completar", () => { // Plan de pruebas 3
+        cy.fillInputsAndSubmit({...userDataWithEmptyDNI});
         cy.get('[data-invalid="true"]').should('be.visible')
     });
 
 
-    it.skip("Email ya registrado", () => { // Plan de pruebas 4
-        cy.fillInputs({...userDataWithRepeatEmail});
-        cy.clickRegisterButton();
+    it("Email ya registrado", () => { // Plan de pruebas 4
+        cy.fillInputsAndSubmit({...userDataWithRepeatEmail});
         cy.contains("Ya existe un usuario registrado con ese correo electrónico").should('be.visible')
     });
 
-    it.skip("Dni ya registrado", () => { // Plan de pruebas 5
-        cy.fillInputs({...userDataWithRepeatedDni});
-        cy.clickRegisterButton();
+    it("Dni ya registrado", () => { // Plan de pruebas 5
+        cy.fillInputsAndSubmit({...userDataWithRepeatedDni});
         cy.contains("Ya existe un usuario registrado con ese DNI").should('be.visible')
     });
 
-    it.skip("Edad mínima no cumplida (<18)", () => { // Plan de pruebas 6
-        cy.fillInputs({...userDataWithWrongAge});
-        cy.clickRegisterButton();
-        //cy.contains("Ya existe un usuario registrado con ese correo electrónico").should('be.visible')
+    it("Edad mínima no cumplida (<18)", () => { // Plan de pruebas 6
+        cy.fillInputsAndSubmit({...userDataWithWrongAge});
+        cy.wait(5000)
+        cy.url().should('include', '/auth/registerUser');
     });
 
-    it.skip("Registro de email erroneo", () => { // Plan de pruebas 7
-        cy.fillInputs({...userDataWithDiferentDni});
-        cy.clickRegisterButton();
+    it("Correos electronicos distintos", () => { // Plan de pruebas 7
+        cy.fillInputsAndSubmit({...userDataWithDiferentEmail});
         cy.contains("Los correos electrónicos no coinciden").should('be.visible')
     });
 
-
-     it.only("Contraseña erronea con menos de 8 digitos", () => { // Plan de pruebas 8
-        cy.fillInputs({...userDataWithRepeatEmail});
-        cy.clickRegisterButton();
-        cy.contains("Ya existe un usuario registrado con ese correo electrónico").should('be.visible')
+    it("Contraseña erronea con menos de 8 digitos", () => { // Plan de pruebas 8
+        cy.fillInputsAndSubmit({...userDataWithShortPassword});
+        cy.contains("La contraseña debe tener al menos 6 caracteres").should('be.visible')
     });
 
-
-    /*
-
-
-     it.only("Contraseña erronea sin caracterer especial y numero", () => { // Plan de pruebas 9
-        cy.fillInputs({...userDataWithRepeatEmail});
-        cy.clickRegisterButton();
-        cy.contains("Ya existe un usuario registrado con ese correo electrónico").should('be.visible')
+    it("Contraseña erronea sin caracterer especial y numero", () => { // Plan de pruebas 9
+        cy.fillInputsAndSubmit({...userDataWithWrongFormatPassword});
+        cy.contains("La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y símbolos.").should('be.visible')
     });
 
-     it.only("DNI Invalido", () => { // Plan de pruebas 10
-        cy.fillInputs({...userDataWithRepeatEmail});
-        cy.clickRegisterButton();
-        cy.contains("Ya existe un usuario registrado con ese correo electrónico").should('be.visible')
-    });
-
-
-    it.only("Telefono Invalido", () => { // Plan de pruebas 11
-        cy.fillInputs({...userDataWithRepeatEmail});
-        cy.clickRegisterButton();
-        cy.contains("Ya existe un usuario registrado con ese correo electrónico").should('be.visible')
-    });
-
-    */
-
-
-
-
-
-
-
-
-
-
-    it("DNI solo numérico", () => { // Plan de pruebas 30
-        cy.fillInputs({...userDataWithWrongFormatDni});
-        cy.clickRegisterButton();
+    it.only("DNI solo numérico", () => { // Plan de pruebas 30
+        cy.fillInputsAndSubmit({...userDataWithWrongFormatDni});
         cy.get('[data-cy="input-dni"]').should('have.value', '1234');
         cy.get('[data-filled="true"][data-invalid="true"]').should('be.visible')
     });
 
+    
+    /*
+    
+    it("DNI Invalido", () => { // Plan de pruebas 10
+        cy.fillInputsAndSubmit({...userDataWithWrongLengthDni});
+    });
 
+    it("Telefono Invalido", () => { // Plan de pruebas 11
+        cy.fillInputsAndSubmit({...userDataWithWrongFormatPhone});
+        cy.contains("Utiliza un formato que coincida con el solicitado").should('be.visible')
+        cy.get('[data-cy="input-telefono"]').should('have.value', '12345');
+    });
+
+    */
 
 })

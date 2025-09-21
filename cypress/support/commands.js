@@ -27,24 +27,38 @@
 import { userData } from "../e2e/Data/UserData"
 
 
-Cypress.Commands.add('fillInputs', (customData) => {
+Cypress.Commands.add('fillInputsAndSubmit', (customData) => {
   cy.get('[data-cy="input-nombres"]').type(userData.nombres)
   cy.get('[data-cy="input-apellido"]').type(userData.apellido)
-  cy.get('[data-cy="input-telefono"]').type(userData.telefono)
+  cy.get('[data-cy="input-telefono"]').type(customData.telefono ?? userData.telefono)
   cy.get('[data-cy="input-dni"]').type(customData.dni ?? userData.dni)
   cy.get('[data-cy="select-provincia"]').click()
   cy.get('[data-cy="select-provincia"]').type(`${userData.provincia}{enter}`)
   cy.get('[data-cy="select-localidad"]').click()
   cy.get('[data-cy="select-localidad"]').type(`${userData.localidad}{enter}`)
-  cy.contains('dd').type(customData?.fechaNacimiento?.dd ?? userData.fechaNacimiento.dd)
-  cy.contains('mm').type(customData?.fechaNacimiento?.mm ?? userData.fechaNacimiento.mm)
-  cy.contains('aaaa').type(customData?.fechaNacimiento?.aaaa ?? userData.fechaNacimiento.aaaa)
+  cy.get('[data-cy="input-fecha-nacimiento"] [data-type="day"]').type(customData.fechaNacimiento?.dd ?? userData.fechaNacimiento.dd);   
+  cy.get('[data-cy="input-fecha-nacimiento"] [data-type="month"]').type(customData.fechaNacimiento?.mm ?? userData.fechaNacimiento.mm);   
+  cy.get('[data-cy="input-fecha-nacimiento"] [data-type="year"]').type(customData.fechaNacimiento?.aaaa ?? userData.fechaNacimiento.aaaa);
   cy.get('[data-cy="input-email"]').type(customData.email ?? userData.email)
-  cy.get('[data-cy="input-confirmar-email"]').type(customData.email2 ?? userData.email)
+  cy.get('[data-cy="input-confirmar-email"]').type(customData.emailConfirm ?? userData.email)
   cy.get('[data-cy="input-password"]').type(customData.password ?? userData.password)
   cy.get('[data-cy="input-repetir-password"]').type(customData.password2 ?? userData.password2Correct)
-})
-
-Cypress.Commands.add('clickRegisterButton', () => {
   cy.get('[data-cy="btn-registrarse"]').click()
 })
+
+
+Cypress.Commands.add('clearAllInputs', () => {
+  cy.get('[data-cy="input-nombres"]').clear();
+  cy.get('[data-cy="input-apellido"]').clear();
+  cy.get('[data-cy="input-telefono"]').clear();
+  cy.get('[data-cy="input-dni"]').clear();
+  cy.get('[data-cy="input-email"]').clear();
+  cy.get('[data-cy="input-confirmar-email"]').clear();
+  cy.get('[data-cy="select-provincia"]').click().type('{selectall}{backspace}');
+  cy.get('[data-cy="select-localidad"]').click().type('{selectall}{backspace}');
+  cy.get('[data-cy="input-fecha-nacimiento"] [data-type="day"]').clear();
+  cy.get('[data-cy="input-fecha-nacimiento"] [data-type="month"]').clear();
+  cy.get('[data-cy="input-fecha-nacimiento"] [data-type="year"]').clear();
+  cy.get('[data-cy="input-password"]').clear();
+  cy.get('[data-cy="input-repetir-password"]').clear();
+});
