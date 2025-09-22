@@ -1,4 +1,4 @@
-describe('Modulo login exitoso', () => {
+describe('Modulo login  exitoso', () => {
 
   // --------- Generadores de datos dinámicos ---------
   const generarEmail = (valido = true) => {
