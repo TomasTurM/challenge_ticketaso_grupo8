@@ -62,3 +62,45 @@ Cypress.Commands.add('clearAllInputs', () => {
   cy.get('[data-cy="input-password"]').clear();
   cy.get('[data-cy="input-repetir-password"]').clear();
 });
+
+Cypress.Commands.add('registrarUsuario', ({
+  nombre,
+  apellido,
+  provincia,
+  localidad,
+  fechaNacimiento,
+  dni,
+  telefono,
+  email,
+  confirmarEmail,
+  password,
+  repetirPassword
+}) => {
+  cy.visit('https://ticketazo.com.ar/auth/login?callbackUrl=/editProfile')
+  cy.get('[data-cy="btn-register-user"]').click()
+  cy.get('[data-cy="input-nombres"]').type(nombre)
+  cy.get('[data-cy="input-apellido"]').clear().type(apellido)
+  cy.get('[data-cy="input-telefono"]').clear().type(telefono)
+  cy.get('[data-cy="input-dni"]').clear().type(dni)
+  cy.get('[data-cy="select-provincia"]').click().type(provincia + '{enter}')
+  cy.get('[data-cy="select-localidad"]').click().type(localidad + '{enter}')
+  const { dd, mm, aaaa } = fechaNacimiento
+
+
+  cy.get('[data-cy="input-fecha-nacimiento"]').click()
+  cy.contains('dd').click().type(dd)
+  cy.get('[data-cy="input-fecha-nacimiento"]').click()
+  cy.contains('mm').click().type(mm)
+  cy.get('[data-cy="input-fecha-nacimiento"]').click()
+  cy.contains('aaaa').click().type(aaaa)
+ 
+
+
+  cy.get('[data-cy="input-email"]').clear().type(email)
+  cy.get('[data-cy="input-confirmar-email"]').clear().type(confirmarEmail || email)
+  cy.get('[data-cy="input-password"]').clear().type(password)
+  cy.get('[data-cy="input-repetir-password"]').clear().type(repetirPassword || password)
+
+
+  cy.get('[data-cy="btn-registrarse"]').click()
+})

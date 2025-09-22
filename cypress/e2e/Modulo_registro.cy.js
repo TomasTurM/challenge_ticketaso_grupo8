@@ -58,11 +58,122 @@ describe("Modulo registro exitoso", () => {
         cy.contains("La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y símbolos.").should('be.visible')
     });
 
-    it.only("DNI solo numérico", () => { // Plan de pruebas 30
+    it("DNI solo numérico", () => { // Plan de pruebas 30
         cy.fillInputsAndSubmit({...userDataWithWrongFormatDni});
         cy.get('[data-cy="input-dni"]').should('have.value', '1234');
         cy.get('[data-filled="true"][data-invalid="true"]').should('be.visible')
     });
+    
+  describe('Registro de usuario', () => {
+ beforeEach(() => {
+   cy.fixture('example.json').as('userData')
+ })
+it('DNI < 8 dígitos', function() {
+   cy.registrarUsuario({
+     nombre: this.userData.nombre,
+     apellido: this.userData.apellido,
+     provincia: this.userData.provincia,
+     localidad: this.userData.localidad,
+     fechaNacimiento: this.userData.fechaNacimiento,
+     dni: this.userData.dniInvalidoCorto,
+     telefono: this.userData.telefonoValido,
+     email: this.userData.emailValido,
+     password: this.userData.passwordValida
+   })
+ cy.contains('Utiliza un formato que coincida con el solicitado', { timeout: 10000 }).should('be.visible')
+}) 
+ it('DNI > 8 dígitos', function() {
+   cy.registrarUsuario({
+     nombre: this.userData.nombre,
+     apellido: this.userData.apellido,
+     provincia: this.userData.provincia,
+     localidad: this.userData.localidad,
+     fechaNacimiento: this.userData.fechaNacimiento,
+     dni: this.userData.dniInvalidoLargo,
+     telefono: this.userData.telefonoValido,
+     email: this.userData.emailValido,
+     password: this.userData.passwordValida
+ })
+})
+it('Telefono con letras', function() {
+   cy.registrarUsuario({
+     nombre: this.userData.nombre,
+     apellido: this.userData.apellido,
+     provincia: this.userData.provincia,
+     localidad: this.userData.localidad,
+     fechaNacimiento: this.userData.fechaNacimiento,
+     dni: this.userData.dniValido,
+     telefono: this.userData.telefonoConLetras,
+     email: this.userData.emailValido,
+     password: this.userData.passwordValida
+ })
+})
+it('Telefono valido', function() {
+   cy.registrarUsuario({
+     nombre: this.userData.nombre,
+     apellido: this.userData.apellido,
+     provincia: this.userData.provincia,
+     localidad: this.userData.localidad,
+     fechaNacimiento: this.userData.fechaNacimiento,
+     dni: this.userData.dniValido,
+     telefono: this.userData.telefonoValido,
+     email: this.userData.emailValido,
+     password: this.userData.passwordValida
+ })
+})
+it('Telefono con Exceso', function() {
+   cy.registrarUsuario({
+     nombre: this.userData.nombre,
+     apellido: this.userData.apellido,
+     provincia: this.userData.provincia,
+     localidad: this.userData.localidad,
+     fechaNacimiento: this.userData.fechaNacimiento,
+     dni: this.userData.dniValido,
+     telefono: this.userData.telefonoExceso,
+     email: this.userData.emailValido,
+     password: this.userData.passwordValida
+ })
+})
+it('Email sin ARROBA', function() {
+   cy.registrarUsuario({
+     nombre: this.userData.nombre,
+     apellido: this.userData.apellido,
+     provincia: this.userData.provincia,
+     localidad: this.userData.localidad,
+     fechaNacimiento: this.userData.fechaNacimiento,
+     dni: this.userData.dniValido,
+     telefono: this.userData.telefonoValido,
+     email: this.userData.emailInvalido,
+     password: this.userData.passwordValida
+ })
+})
+it('PASSWORD MINIMA', function() {
+   cy.registrarUsuario({
+     nombre: this.userData.nombre,
+     apellido: this.userData.apellido,
+     provincia: this.userData.provincia,
+     localidad: this.userData.localidad,
+     fechaNacimiento: this.userData.fechaNacimiento,
+     dni: this.userData.dniValido,
+     telefono: this.userData.telefonoValido,
+     email: this.userData.emailValido,
+     password: this.userData.passwordCorta
+ })
+})
+it('PASSWORD COMPLEJA', function() {
+   cy.registrarUsuario({
+     nombre: this.userData.nombre,
+     apellido: this.userData.apellido,
+     provincia: this.userData.provincia,
+     localidad: this.userData.localidad,
+     fechaNacimiento: this.userData.fechaNacimiento,
+     dni: this.userData.dniValido,
+     telefono: this.userData.telefonoValido,
+     email: this.userData.emailValido,
+     password: this.userData.passwordSinSimbolo
+ })
+})
+})
 
     
     /*
