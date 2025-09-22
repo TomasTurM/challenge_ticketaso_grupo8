@@ -59,11 +59,11 @@ describe("Modulo registro de usuario Parte 1", () => {
     });
 
     it("DNI Invalido", () => { // Plan de pruebas 10
-        cy.fillInputsAndSubmit({...userDataWithWrongLengthDni});
+        cy.fillInputsAndSubmit({...userData.userDataWithWrongLengthDni});
     });
 
     it("Telefono Invalido", () => { // Plan de pruebas 11
-        cy.fillInputsAndSubmit({...userDataWithWrongFormatPhone});
+        cy.fillInputsAndSubmit({...userData.userDataWithWrongFormatPhone});
         cy.contains("Utiliza un formato que coincida con el solicitado").should('be.visible')
         cy.get('[data-cy="input-telefono"]').should('have.value', '12345');
     });
