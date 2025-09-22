@@ -5,7 +5,9 @@ Repositorio del grupo 8 para entrega del Challenge Ticketaso, conformado por par
 Este repositorio contiene una serie de pruebas automatizadas realizadas con **Cypress**.  
 El  objetivo es poner en práctica la elaboración de planes de prueba y la automatización 
 de casos funcionales con Cypress, aplicando buenas prácticas de reporte de defectos.
-Las pruebas se realizaran en la pagina web de Ticketaso [(link)](https://vps-3696213-x.dattaweb.com/).
+Las pruebas se realizaran en la pagina web de Ticketaso 
+- [link QA](https://vps-3696213-x.dattaweb.com/).
+- [link Produccion](https://ticketazo.com.ar).
 
 ## 🚀 Requisitos
 - npm
@@ -33,23 +35,15 @@ npx cypress open
 npx cypress run
 ```
 
-## 📂 Estructura del proyecto
-
-```
-challenge_ticketaso_grupo8/
-  cypress/
-  [PENDIENTE]
-```
-
 ## 🔑 Tests disponibles
 
 Los test cases estan disponibles para ver en el siguiente link
 
 [Planilla de Plan de Pruebas (Google Spreadsheets)](https://docs.google.com/spreadsheets/d/1hQVeDdiBqR1mtWfs-KDt2vLJZ8Ix0Yo6/edit?usp=sharing&ouid=117098021920744709897&rtpof=true&sd=true)
 
-[Tablero de Trello]() [PENDIENTE]
+[Tablero de Trello](https://trello.com/b/PTYfUdfS/trello-challenge-grupo-8)
 
-### 1. Registro Usuario (`cypress/e2e/login.cy.js`) [PENDIENTE]
+### 1. Registro Usuario
 Pruebas relacionadas con el flujo de creación de nuevos usuarios.
 
 - **Registro exitoso**  
@@ -84,7 +78,7 @@ Pruebas relacionadas con el flujo de creación de nuevos usuarios.
 
 - **Contraseña errónea sin caracter especial y numero**  
 
-### 2. Login Usuario (`cypress/e2e/login.cy.js`) [PENDIENTE]
+### 2. Login Usuario 
 Pruebas relacionadas con el flujo de autenticación de usuarios.
 
 - **Login exitoso**  
@@ -103,17 +97,17 @@ Pruebas relacionadas con el flujo de autenticación de usuarios.
 
 - **Contraseña incorrecta**  
 
-### 3. Perfil Usuario (`cypress/e2e/login.cy.js`) [PENDIENTE]
+### 3. Perfil Usuario
 Pruebas relacionadas con los perfiles de usuarios.
 
 - **Cambiar contraseña**  
 
-### 4. Perfil Establecimiento/Organizador de Eventos (`cypress/e2e/login.cy.js`) [PENDIENTE]
+### 4. Perfil Establecimiento/Organizador de Eventos 
 Pruebas relacionadas con los perfiles de usuarios organizadores o establecimientos.
 
 - **Cambiar datos de perfil**  
 
-### 5. Filtros/Buscador de Eventos (`cypress/e2e/login.cy.js`) [PENDIENTE]
+### 5. Filtros/Buscador de Eventos 
 Pruebas relacionadas con las funcionalidades de navegación, filtro y busqueda de entradas, presentes en la pagina principal.
 
 - **Acceso publico navegacion**  
@@ -134,7 +128,7 @@ Pruebas relacionadas con las funcionalidades de navegación, filtro y busqueda d
 
 - **Modo oscuro / Modo Claro**  
 
-### 6. Compra de Entradas (`cypress/e2e/login.cy.js`) [PENDIENTE]
+### 6. Compra de Entradas 
 Pruebas relacionadas con el flujo de compra para entradas de eventos.
 
 - **Comprar exitosa de entradas de estadio (lista de sectores)**  
@@ -166,7 +160,7 @@ Hay dos modos presentes en Ticketaso para elegir entradas:
 - **Mapa de sectores**: muestra graficamente los sectores disponibles del evento, 
 permitiendo al usuario poder visualizar las instalaciones y poder elegir a que zona ir
 
-### 7. Cargar evento organizador (`cypress/e2e/login.cy.js`) [PENDIENTE] 
+### 7. Cargar evento organizador  
 Pruebas relacionadas con el flujo de autenticación de usuarios. 
 
 - **Cargar evento como organizador (caso exitoso)**  
