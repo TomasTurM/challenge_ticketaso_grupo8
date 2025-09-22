@@ -1,5 +1,35 @@
 {
   "name": "Using fixtures to represent data",
   "email": "hello@cypress.io",
-  "body": "Fixtures are a great way to mock data for responses to routes"
+  "body": "Fixtures are a great way to mock data for responses to routes",
+
+  "nombre": "Celeste",
+  "apellido": "Rodriguez",
+  "provincia": "Ciudad Autonoma de Buenos Aires",
+  "localidad": "Mataderos",
+  "fechaNacimiento": {
+    "dd": "10",
+    "mm": "04",
+    "aaaa": "1993"
+  },
+
+
+  "dniInvalidoCorto": "1234567",
+  "dniInvalidoLargo": "89279420010",
+  "dniValido": "12345678",
+
+
+  "telefonoValido": "3511234567",
+  "telefonoConLetras": "351ABC0000",
+  "telefonoExceso": "351123456789",
+
+
+  "emailValido": "celeste.rodriguez@gmail.com",
+  "emailInvalido": "celeste.rodriguezgmail.com",
+
+
+  "passwordCorta": "Abc123",
+  "passwordSinSimbolo": "Abc12345",
+  "passwordValida": "Abc12345!"
 }
+
